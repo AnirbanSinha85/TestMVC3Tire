@@ -1,0 +1,57 @@
+﻿@model TestMVC3Tire.Models.Contact
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Contact Edit</legend>
+        @Html.HiddenFor(model => model.ContactID)
+        <div  style="width: 100%; height: auto;">
+            <table>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.FirstName)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </td>
+                </tr>
+                 
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.AddressLine1)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.AddressLine1)
+                        @Html.ValidationMessageFor(model => model.AddressLine1)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.PhoneNo)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.PhoneNo)
+                        @Html.ValidationMessageFor(model => model.PhoneNo)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ShowList")
+</div>

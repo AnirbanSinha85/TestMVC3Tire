@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TestMVC3Tire.Models.Contact>
+@{
+    ViewBag.Title = "ShowList";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CallToFillGrid(0);
+    })
+    function CallToFillGrid(id) {
+        $.getJSON('/Contact/ShowTableList/',
+            {
+                id: id,
+                FilterField: $("#ddlFilterString").val(),
+                FilterValue: $("#txtFilterField").val()
+            },
+            function (data) {
+                var items = '';
+                $.each(data, function (i, Customer) {
+                    var EditLink = "<a href='Edit/" + Customer.ContactID + "'><img src='../images/edit.png'/></a>";
+                    var DetailsLink = "<a href='Details/" + Customer.ContactID + "'><img src='../images/detail.png'/></a>";
+                    var DeleteLink = "<a href='Delete/" + Customer.ContactID + "'><img src='../images/delete.png'/></a>";
+
+                    items += "<tr><td>" + Customer.FirstName + "</td>"
+                        + "<td>" + Customer.PhoneNo + "</td>"
+                        + "<td>" + Customer.AddressLine1 + "</td>"
+                        + "<td><table><tr><td>" + EditLink + "</td><td>" + DetailsLink + "</td><td>" + DeleteLink + "</td></tr></table></td></tr>";
+                });
+                if (parseInt(id) - 1 >= 0) {
+                    var nextpage = parseInt(id) + 1;
+                    var previouspage = parseInt(id) - 1;
+                    items += "<tr><td  colspan='3' onclick='CallToFillGrid(" + previouspage + ");'><a href='#'><img src='../images/prev.png'/><a/></td>"
+                    items += "<td align='right' onclick='CallToFillGrid(" + nextpage + ");'><a href='#'><img src='../images/next.png'/><a/></td></tr>";
+                }
+                else {
+                    items += "<tr><td colspan='3' onclick='CallToFillGrid(0);'><a href='#'><img src='../images/prev.png'/><a/></td> "
+                    items += "<td  align='right' onclick='CallToFillGrid(" + parseInt(id) + 1 + ");'><a href='#'><img src='../images/next.png'/><a/></td></tr>";
+                }
+                $('#tableBody').html(items);
+            });
+    }
+
+</script>
+
+<h2>ShowList</h2>
+
+
+@using (@Html.BeginForm("ShowList", "Contact", FormMethod.Post))
+{
+     
+    <h2>Welcome: @Html.Label("UserName", (string)ViewBag.UserName)</h2>
+  
+    <table id="tableList" style="width: 50%;" class="CSSTableGenerator">
+        <thead>
+            <tr>
+                <th align="left">FirstName
+                </th>
+                <th align="left">PhoneNo
+                </th>
+                <th align="left">AddressLine1
+                </th>
+                <th align="left">Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+}

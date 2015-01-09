@@ -1,0 +1,88 @@
+﻿@model TestMVC3Tire.Models.Collection
+@{
+    ViewBag.Title = "Index";
+}
+
+@using System.Data
+
+<link href="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/demos/demos.css")" rel="stylesheet" type="text/css" />
+
+<script src="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/jquery-1.7.1.js")" type="text/javascript"></script>
+<script src="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/ui/jquery.ui.core.js")" type="text/javascript"></script>
+<script src="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/ui/jquery.ui.widget.js")" type="text/javascript"></script>
+<script src="@Url.Content("../../jquery-ui-1.8.17.custom/development-bundle/ui/jquery.ui.datepicker.js")" type="text/javascript"> </script>
+<script src="@Url.Content("../../Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("../../Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<h2>Index</h2>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker").datepicker({
+            altField: "#alternate",
+            altFormat: "DD-MM-yyyy"
+        });
+    });
+    $(document).ready(function () {
+        tbRecord.innerHTML = $("<%=tblBodyData.ClientID%>").val();
+    });
+
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("ValSuccessMessage")
+    @Html.Hidden("tblBodyData")
+    <p>@Html.ActionLink("Mandate List", "ShowList")</p>
+    <div style="width: 100%; height: auto;">
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>Select Contact</td>
+                    <td colspan="2">
+                        @Html.DropDownListFor(m => m.ContactID, ViewBag.ddlContact as SelectList, "Select")
+                        @Html.ValidationMessageFor(m => m.ContactID)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Select Mandate</td>
+                    <td colspan="2">
+                        @Html.DropDownListFor(m => m.MandateID, ViewBag.ddlMandate as SelectList, "Select")
+                        @Html.ValidationMessageFor(m => m.MandateID)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Collection Amount</td>
+                    <td colspan="2">
+                        @Html.TextBoxFor(model => model.CollectionAmount)@Html.ValidationMessageFor(model => model.CollectionAmount)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Collection Date</td>
+                    <td colspan="2">
+                        @Html.TextBoxFor(model => model.CollectionDate, new { id = "datepicker" })@Html.ValidationMessageFor(model => model.CollectionDate)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <input type="submit" value="Save" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @Html.Partial("ViewList", (List<TestMVC3Tire.Models.Collection>)TempData["CollectionList"]);
+    <p>
+        <button type="submit" id="btnSave" name="Command" value="SaveAll">Save All</button>
+    </p>
+}
+
+

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+
+
+    <link href="@Url.Content("~/ddlevelsfiles/ddlevelsmenu-base.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ddlevelsfiles/ddlevelsmenu-topbar.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/ddlevelsfiles/ddlevelsmenu-sidebar.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/ddlevelsfiles/ddlevelsmenu.js")" type="text/javascript"> </script>
+
+
+    <script type="text/javascript">
+        ddlevelsmenu.setup("ddtopmenubar", "topbar")
+    </script>
+
+</head>
+
+<body>
+
+    <div id="ddtopmenubar" class="mattblackmenu">
+        <ul>
+            <li>@Html.ActionLink("Home", "Index", "Home") </li>
+            <li>@Html.ActionLink("Contact", "Index", "Contact", null, new { rel = "ddsubmenu1" })</li>
+            <li>@Html.ActionLink("Mandate", "Index", "Mandate")</li>
+        </ul>
+
+    </div>
+    <ul id="ddsubmenu1" class="ddsubmenustyle">
+        <li>@Html.ActionLink("Show List", "ShowList", "Contact")</li>
+        <li>@Html.ActionLink("Contact Entry", "Index", "Contact")
+            <ul>
+                <li>@Html.ActionLink("Show List", "ShowList", "Contact")</li>
+                <li>@Html.ActionLink("Home", "Index", "Contact")</li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("Home", "Index", "Contact")</li>
+    </ul>
+
+    @RenderBody()
+
+
+</body>
+</html>

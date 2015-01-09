@@ -1,0 +1,44 @@
+﻿@model PRLayer.PRContact
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Contact Entry</h2>
+
+@using (@Html.BeginForm("Index", "TestContact", FormMethod.Post))
+{
+    @Html.Hidden("ValSuccessMessage")
+    <p>@Html.ActionLink("Contact List", "ShowList")</p>
+    <div style="width: 100%; height: auto;">
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>First Name</td>
+                    <td>@Html.TextBoxFor(model => model.FirstName)@Html.ValidationMessageFor(model => model.FirstName)</td>
+                </tr>
+                <tr>
+                    <td>Address Line1</td>
+                    <td>@Html.TextBoxFor(model => model.AddressLine1)@Html.ValidationMessageFor(model => model.AddressLine1)</td>
+                    <td>Phone No</td>
+                    <td>@Html.TextBoxFor(model => model.PhoneNo)@Html.ValidationMessageFor(model => model.PhoneNo)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Save" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="dialog-message" title="Message Dialog" style="background-color: aliceblue;">
+        <p>
+            <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+            <div id="MessageBox">
+                Contact Saved Successfully.
+            </div>
+        </p>
+
+    </div>
+}
+

@@ -1,0 +1,54 @@
+﻿@model TestMVC3Tire.Models.Address
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+    function GetCity(_stateId) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#Id").html(procemessage).show();
+
+        //var selCity = "<option value='0'>Select City</option>";
+        //$("#ddlcity").html(selCity).show();
+
+        var url = "/Address/GetCityByStaeId/";
+
+        $.ajax({
+            url: url,
+            data: { stateid: _stateId },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value='0'>Select City</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#Id").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+</script>
+<h4>MVC Cascading Dropdown List Using Jquery</h4>
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(m => m.StateModel, new SelectList(Model.StateModel, "Id", "StateName"), new { @id = "ddlstate", @style = "width:200px;", @onchange = "javascript:GetCity(this.value);" })
+      @Html.ValidationMessageFor(m=>m.Id)
+    <br />
+    <br />
+    @Html.DropDownListFor(m=>m.Id, new SelectList(new List<string>() {"Select City"}))
+
+    <br />
+    <input type="submit" value="Save" />
+    <br />
+    
+}

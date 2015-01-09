@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TestMVC3Tire.Models.Collection>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>ContactID
+        </th>
+        <th>MandateID
+        </th>
+        <th>CollectionAmount
+        </th>
+        <th>CollectionDate
+        </th>
+        <th>Status
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in  Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MandateID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+    }
+
+</table>

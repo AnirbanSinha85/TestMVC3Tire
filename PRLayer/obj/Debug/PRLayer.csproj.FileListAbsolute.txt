@@ -1,0 +1,4 @@
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\PRLayer\bin\Debug\PRLayer.dll
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\PRLayer\bin\Debug\PRLayer.pdb
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\PRLayer\obj\Debug\PRLayer.dll
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\PRLayer\obj\Debug\PRLayer.pdb

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<TestMVC3Tire.Models.Mandate>
+@{
+    ViewBag.Title = "ShowList";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CallToFillGrid(0);
+    })
+    function CallToFillGrid(id) {
+        $.getJSON('/Mandate/ShowTableList',
+            {
+                id: id,
+                FilterField: $("#ddlFilterString").val(),
+                FilterValue: $("#txtFilterField").val()
+            },
+            function (data) {
+                var items = '';
+                $.each(data, function (i, Mandate) {
+                    var EditLink = "<a href='Edit/" + Mandate.MandateID + "'><img src='../images/edit.png'/></a>";
+                    var DetailsLink = "<a href='Details/" + Mandate.MandateID + "'><img src='../images/detail.png'/></a>";
+                    var DeleteLink = "<a href='Delete/" + Mandate.MandateID + "'><img src='../images/delete.png'/></a>";
+
+                    items += "<tr><td>" + Mandate.MandateName + "</td>"
+                        + "<td>" + Mandate.ContactName + "</td>"
+                        + "<td>" + Mandate.SalutationName + "</td>"
+                        + "<td><table><tr><td>" + EditLink + "</td><td>" + DetailsLink + "</td><td>" + DeleteLink + "</td></tr></table></td></tr>";
+                });
+                if (parseInt(id) - 1 >= 0) {
+                    var nextpage = parseInt(id) + 1;
+                    var previouspage = parseInt(id) - 1;
+                    items += "<tr><td  colspan='3' onclick='CallToFillGrid(" + previouspage + ");'><a href='#'><img src='../images/prev.png'/><a/></td>"
+                    items += "<td align='right' onclick='CallToFillGrid(" + nextpage + ");'><a href='#'><img src='../images/next.png'/><a/></td></tr>";
+                }
+                else {
+                    items += "<tr><td colspan='3' onclick='CallToFillGrid(0);'><a href='#'><img src='../images/prev.png'/><a/></td> "
+                    items += "<td  align='right' onclick='CallToFillGrid(" + parseInt(id) + 1 + ");'><a href='#'><img src='../images/next.png'/><a/></td></tr>";
+                }
+                $('#tableBody').html(items);
+            });
+    }
+
+</script>
+
+<h2>ShowList</h2>
+
+@using (@Html.BeginForm("ShowList", "Mandate", FormMethod.Post))
+{
+    <table id="tableUpperList">
+        <thead>
+            <tr>
+                <th align="left">Date: @Html.Label("fromDate", (string)ViewBag.fromDate)
+                </th>
+                <th align="left">Contact
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tableUpper">
+
+        </tbody>
+    </table>
+    
+    <table id="tableList" style="width: 50%;" class="CSSTableGenerator">
+        <thead>
+            <tr>
+                <th align="left">Mandate Name
+                </th>
+                <th align="left">Contact Name
+                </th>
+                <th align="left">SalutationName
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+}
+

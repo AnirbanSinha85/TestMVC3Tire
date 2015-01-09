@@ -1,0 +1,46 @@
+﻿@using TestMVC3Tire.Controllers
+@model dynamic 
+
+@*@{
+    Layout = null;
+}*@
+
+<h2>@ViewBag.Message</h2>
+<p><b>Contact List</b></p>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>FirstName</th>
+        <th>PhoneNo</th>
+    </tr>
+    @foreach (TestMVC3Tire.Models.Contact teacher in Model.Contact)
+    {
+        <tr>
+            <td>@teacher.ContactID</td>
+            <td>@teacher.FirstName</td>
+            <td>@teacher.PhoneNo</td>
+        </tr>
+    }
+</table>
+
+
+
+<p><b>Mandate List</b></p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>MandateName</th>
+        <th>SalutationName</th>
+    </tr>
+
+    @foreach (TestMVC3Tire.Models.Mandate student in Model.Mandate)
+    {
+        <tr>
+            <td>@student.MandateID</td>
+            <td>@student.MandateName</td>
+            <td>@student.SalutationName</td>
+        </tr>
+    }
+
+</table>

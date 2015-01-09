@@ -1,0 +1,84 @@
+﻿@model TestMVC3Tire.Models.LogIn
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link href="@Url.Content("~/CSS/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/demo.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/login-theme-1.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/animate-custom.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/js/custom.modernizr.js")" type="text/javascript"></script>
+</head>
+
+
+<body class="fade-in">
+
+    @using (@Html.BeginForm("Index", "LogIn", FormMethod.Post))
+    {
+        @Html.Hidden("ValSuccessMessage")
+        <div class="container" id="login-block">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                    <div class="login-box clearfix animated flipInY">
+                        <div class="page-icon animated bounceInDown">
+                            <img src="images/user-icon.png" alt="Key icon" />
+                        </div>
+                        <div class="login-logo">
+                            <a href="#?login-theme-3">
+                                <img src="images/login-logo.png" alt="Company Logo" /></a>
+                        </div>
+                        <hr>
+                        <div class="login-form">
+                            <!-- Start Error box -->
+                            <div class="alert alert-danger hide">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <h4>Error!</h4>
+                                Your Error Message goes here
+                            </div>
+                            <!-- End Error box -->
+                            <form action="#" method="get">
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "input-field", @placeholder = "User name", @required = "" })@Html.ValidationMessageFor(model => model.UserName)
+                                @Html.TextBoxFor(model => model.Password, new { @class = "input-field", @placeholder = "Password", @required = "" })@Html.ValidationMessageFor(model => model.Password)
+                                <input type="submit" value="Save" class="btn btn-login" />
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Login box -->
+        <footer class="container">
+            <p id="footer-text"><small>Copyright © 2014 <a href="#">Anirban Pvt. Ltd.</a></small></p>
+        </footer>
+    }
+
+    @*  <script src="JS/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="JS/bootstrap.js"></script>
+    <script src="JS/placeholder-shim.js"></script>
+    <script src="JS/custom.js"></script>*@
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model TestMVC3Tire.Models.Mandate
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (@Html.BeginForm("Index", "Mandate", FormMethod.Post))
+{
+    @Html.Hidden("ValSuccessMessage")
+    <p>@Html.ActionLink("Mandate List", "ShowList")</p>
+    <div style="width: 100%; height: auto;">
+        <table>
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>Contact</td>
+                    <td colspan="2">
+                          @Html.DropDownListFor(m=>m.ContactID,ViewBag.ddlContact as SelectList,"Select")
+                        @Html.ValidationMessageFor(m=>m.ContactID)
+
+                       @* @Html.DropDownListFor(model => model.ContactID, new SelectList(Model.AssigneeList, "Value", "Text"), "--Select--")*@
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Mandate Name</td>
+                    <td>@Html.DropDownList("ddlSalutation", new[] {
+                                            new SelectListItem() {Text = "Mr.",
+                                            Value = "1"},
+                                            new SelectListItem() {Text = "MRS.",
+                                            Value = "2" },
+                                            new SelectListItem() {Text = "Dr.",
+                                            Value = "3" }
+                                            }, "Select")</td>
+
+                    <td>@Html.TextBoxFor(model => model.MandateName)@Html.ValidationMessageFor(model => model.MandateName)</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <input type="submit" value="Save" />
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+}

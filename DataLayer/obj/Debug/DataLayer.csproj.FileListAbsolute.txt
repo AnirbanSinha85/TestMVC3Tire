@@ -1,0 +1,4 @@
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\DataLayer\bin\Debug\DataLayer.dll
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\DataLayer\bin\Debug\DataLayer.pdb
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\DataLayer\obj\Debug\DataLayer.dll
+E:\R&D\MVC_DataBase_First\TestMVC3Tire\DataLayer\obj\Debug\DataLayer.pdb
